@@ -1,0 +1,167 @@
+<!doctype html>
+{% load static %}
+<html lang="en" data-bs-theme="auto">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.118.2">
+  <title>Inicio Sesion</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sign-in/">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+  <link href="{% static 'aplicacionVoluntarios/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+    .form-signin {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 30px; /* Espacio debajo del formulario */
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    .b-example-divider {
+      width: 100%;
+      height: 3rem;
+      background-color: rgba(0, 0, 0, .1);
+      border: solid rgba(0, 0, 0, .15);
+      border-width: 1px 0;
+      box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+    }
+
+    .form-signin {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-title {
+      text-align: center;
+    }
+
+    .btn {
+      background-color: red;
+      color: #fff;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 200px;
+    }
+
+    .btn:hover {
+      background-color: black;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #imagenInicio {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    input {
+      border: 2px solid red;
+      border-radius: 8px;
+      padding: 8px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+
+<body class="d-flex align-items-center bg-body-tertiary">
+  <div class="container">
+    <main class="form-signin">
+      <div class="login-container">
+        <img id="imagenInicio" class="" src="{% static '../static/BomberosInicio.jpg' %}" alt="" width="300" height="200">
+        <h2 class="login-title">Iniciar Sesión</h2>
+        {% if messages %}
+        <ul class="messages">
+          {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        <form method="post" action="{% url 'login' %}" class="login-form">
+          {% csrf_token %}
+
+          <div class="mb-1 row">
+            <div class="col-12">
+              <label for="{{ form.username.id_for_label }}" class="form-label">Rut:</label>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <div class="col-12">
+              {{ form.username }}
+            </div>
+          </div>
+
+          <div class="mb-1 row">
+            <div class="col-12">
+              <label for="{{ form.password.id_for_label }}" class="form-label">Contraseña:</label>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <div class="col-12">
+              {{ form.password }}
+            </div>
+          </div>
+
+          <!-- Agregar el checkbox para mostrar la contraseña -->
+          <div class="mb-3 row">
+            <div class="col-12">
+              <input type="checkbox" id="show-password" class="form-check-input">
+              <label for="show-password" class="form-check-label">Mostrar Contraseña</label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary mt-4 mx-auto">Iniciar Sesión</button>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script src="{% static 'aplicacionVoluntarios/js/bootstrap.bundle.min.js' %}"></script>
+
+  <script>
+    // Script para alternar la visibilidad de la contraseña
+    document.getElementById('show-password').addEventListener('change', function () {
+      var passwordField = document.querySelector('input[name="password"]'); // Usamos el name del campo password
+      if (this.checked) {
+        passwordField.type = 'text'; // Mostrar la contraseña
+      } else {
+        passwordField.type = 'password'; // Ocultar la contraseña
+      }
+    });
+  </script>
+</body>
+
+</html>

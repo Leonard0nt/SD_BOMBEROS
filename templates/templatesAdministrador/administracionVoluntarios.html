@@ -1,0 +1,384 @@
+<!doctype html>
+{% load static %}
+<html lang="es" data-bs-theme="auto">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>voluntarios</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
+
+
+
+
+
+    <link href="{% static 'aplicacionVoluntarios/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'aplicacionVoluntarios/css/style.css' %}">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+        .b-example-divider {
+            width: 100%;
+            height: 3rem;
+            background-color: rgba(0, 0, 0, .1);
+            border: solid rgba(0, 0, 0, .15);
+            border-width: 1px 0;
+            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        }
+
+        .b-example-vr {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 100vh;
+        }
+
+        .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+        }
+
+        .nav-scroller {
+            position: relative;
+            z-index: 2;
+            height: 2.75rem;
+            overflow-y: hidden;
+        }
+
+        .nav-scroller .nav {
+            display: flex;
+            flex-wrap: nowrap;
+            padding-bottom: 1rem;
+            margin-top: -1px;
+            overflow-x: auto;
+            text-align: center;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .btn-bd-primary {
+            --bd-violet-bg: #712cf9;
+            --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+            --bs-btn-font-weight: 600;
+            --bs-btn-color: var(--bs-white);
+            --bs-btn-bg: var(--bd-violet-bg);
+            --bs-btn-border-color: var(--bd-violet-bg);
+            --bs-btn-hover-color: var(--bs-white);
+            --bs-btn-hover-bg: #6528e0;
+            --bs-btn-hover-border-color: #6528e0;
+            --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+            --bs-btn-active-color: var(--bs-btn-hover-color);
+            --bs-btn-active-bg: #5a23c8;
+            --bs-btn-active-border-color: #5a23c8;
+        }
+
+        .bd-mode-toggle {
+            z-index: 1500;
+        }
+    </style>
+
+
+</head>
+<header>
+    <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container">
+            <a style="margin-left: -35px;" href="#" class="navbar-brand d-flex align-items-center me-auto"
+                style="width: 50%;">
+                <strong style="width: 50%;">
+                    <svg class="bi pe-none me-auto" width="40" height="32">
+                        <style>
+                            #logo {
+                                width: 40px;
+                                height: 40px;
+                            }
+                        </style>
+                        <img id='logo' src="{% static '../static/Bomberos.png' %}">
+                    </svg>
+                    <span style="font-size: 15px;">Cuerpo de bomberos Parral</span>
+                </strong>
+            </a>
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                    <strong style="color: white;"></strong>
+                </a>
+                <ul class="dropdown-menu text-small shadow">
+                    <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesion</a></li>
+                </ul>
+            </div>
+        </div>
+</header>
+
+<body>
+    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+        <symbol id="home" viewBox="0 0 16 16">
+            <path
+                d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+        </symbol>
+
+        <symbol id="grid" viewBox="0 0 16 16">
+            <path
+                d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+        </symbol>
+    </svg>
+
+    <main class="d-flex flex-nowrap">
+        <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-light" style="width: 230px;">
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a href="/administrador" class="nav-link text-dark" aria-current="page">
+                        <svg class="bi pe-none me-2" width="16" height="16">
+                            <use xlink:href="#home" />
+                        </svg>
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="/agregarVoluntario" class="nav-link text-dark">
+                        <svg class="bi pe-none me-2" width="16" height="16">
+                            <use xlink:href="#grid" />
+                        </svg>
+                        Agregar Voluntario
+                    </a>
+                </li>
+                <li>
+                    <a href="/agregarUnidad" class="nav-link text-dark">
+                        <svg class="bi pe-none me-2" width="16" height="16">
+                            <use xlink:href="#grid" />
+                        </svg>
+                        Agregar Unidad
+                    </a>
+                </li>
+                <li>
+                    <a href="/administracionVoluntarios" class="nav-link text-dark" style="border: 1px solid red;">
+                        <svg class="bi pe-none me-2" width="16" height="16">
+                            <use xlink:href="#grid" />
+                        </svg>
+                        Lista voluntarios
+                    </a>
+                </li>
+                <li>
+                    <a href="/administracionUnidades" class="nav-link text-dark">
+                        <svg class="bi pe-none me-2" width="16" height="16">
+                            <use xlink:href="#grid" />
+                        </svg>
+                        Lista Unidades
+                    </a>
+                </li>
+                <li>
+                    <a href="/emergencias" class="nav-link text-dark" >
+                        <svg class="bi pe-none me-2" width="16" height="16">
+                            <use xlink:href="#grid" />
+                        </svg>
+                        Emergencias
+                    </a>
+                </li>
+                <li>
+                    <a href="/generar_pdf" class="nav-link text-dark" >
+                        <svg class="bi pe-none me-2" width="16" height="16">
+                            <use xlink:href="#grid" />
+                        </svg>
+                        Generar Pdf
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="b-example-divider b-example-vr"></div>
+
+        <div class="container mt-5">
+            {% if voluntarios_list %}
+            <table class="table table-striped table-inverse table-responsive">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>Rut</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>Ult Conexion</th>
+                        <th>Cuartel</th>
+                        <th>Cargo</th>
+                        <th>Disp..</th>
+                        <th>n° registro</th>
+                        <th>Conductor</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for voluntario in voluntarios_list %}
+                    <tr>
+                        <th>{{voluntario.rut}}</th>
+                        <th>{{voluntario.nombres}}</th>
+                        <th>{{voluntario.apellidos}}</th>
+                        <th>{{voluntario.last_login}}</th>
+                        <th>{{voluntario.cuartel_actual_vol.nombre_cuartel}}</th>
+                        <th>{{voluntario.cargo}}</th>
+                        {% if voluntario.estado %}
+                        <th>Si</th>
+                        {% else %}
+                        <th>No</th>
+                        {% endif %}
+                        <th>{{voluntario.numero_registro}}</th>
+                        {% if voluntario.conductor %}
+                        <th>Si</th>
+                        {% else %}
+                        <th>No</th>
+                        {% endif %}
+                        <th>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#editarVoluntarioModal{{ voluntario.rut }}">
+                                Editar
+                            </button>
+                        </th>
+                        <th>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#eliminarVoluntarioModal{{ voluntario.rut }}">
+                                Eliminar
+                            </button>
+                        </th>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <div class="alert alert-primary" role="alert">
+                <Strong>No hay voluntarios registrados</Strong>
+            </div>
+            {% endif %}
+
+            {% for voluntario in voluntarios_list %}
+            <div class="modal fade" id="editarVoluntarioModal{{ voluntario.rut }}" tabindex="-1"
+                aria-labelledby="editarVoluntarioModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editarVoluntarioModalLabel">Editar Voluntario</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Formulario de edición -->
+                            <form method="post" action="{% url 'editar_voluntarioADM' voluntario.rut %}">
+                                {% csrf_token %}
+
+                                <div class="mb-3">
+                                    <label for="id_nombres">Nombres:</label>
+                                    <input type="text" id="id_nombres" name="nombres" value="{{ voluntario.nombres }}"
+                                        class="form-control col-md-6 border-black">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="id_apellidos">Apellidos:</label>
+                                    <input type="text" id="id_apellidos" name="apellidos"
+                                        value="{{ voluntario.apellidos }}" class="form-control col-md-6 border-black">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="id_cargo">Cargo:</label>
+                                    <input type="text" id="id_cargo" name="cargo" value="{{ voluntario.cargo }}"
+                                        class="form-control col-md-6 border-black">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="id_telefono">Teléfono:</label>
+                                    <input type="text" id="id_telefono" name="telefono"
+                                        value="{{ voluntario.telefono }}" class="form-control col-md-6 border-black">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="id_compania">Compañía:</label>
+                                    <input type="text" id="id_compania" name="compania"
+                                        value="{{ voluntario.compania }}" class="form-control col-md-6 border-black">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="id_direccion">Dirección:</label>
+                                    <textarea id="id_direccion" name="direccion" class="form-control col-md-6 col-md-6 border-black"
+                                        rows="2">{{ voluntario.direccion }}</textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="id_conductor">Conductor:</label>
+                                    <input type="checkbox" id="id_conductor" name="conductor"  {% if voluntario.conductor %}checked{% endif %}>
+                                </div>
+
+                                <div class="d-flex">
+                                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                                    <button  type="button" class="btn btn-warning ms-auto" data-bs-toggle="modal"
+                                        data-bs-target="#cambiarContrasenaModal{{ voluntario.rut }}">
+                                        Cambiar Contraseña
+                                    </button> 
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal de cambio de contraseña -->
+            <div class="modal fade" id="cambiarContrasenaModal{{ voluntario.rut }}" tabindex="-1"
+                aria-labelledby="cambiarContrasenaModalLabel{{ voluntario.rut }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="cambiarContrasenaModalLabel{{ voluntario.rut }}">Cambiar
+                                Contraseña</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Formulario de cambio de contraseña -->
+                            <form method="post" action="{% url 'cambiar_password_vol' voluntario.rut %}">
+                                {% csrf_token %}
+
+                                <div class="mb-3">
+                                    <label for="id_nueva_contrasena">Nueva Contraseña:</label>
+                                    <input type="password" id="id_nueva_contrasena" name="nueva_contrasena"
+                                        class="form-control col-md-6 border-black">
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% for voluntario in voluntarios_list %}
+            <div class="modal fade" id="eliminarVoluntarioModal{{ voluntario.rut }}" tabindex="-1"
+                aria-labelledby="eliminarVoluntarioModalLabel{{ voluntario.rut }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="eliminarVoluntarioModalLabel{{ voluntario.rut }}">Eliminar
+                                Voluntario</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>¿Estás seguro de que deseas eliminar al voluntario {{ voluntario.nombres }} {{ voluntario.apellidos }}?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <a href="{% url 'eliminar_voluntario' voluntario.rut %}" class="btn btn-danger">Eliminar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+    </main>
+    <script src="{% static 'aplicacionVoluntarios/js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+
+</html>
